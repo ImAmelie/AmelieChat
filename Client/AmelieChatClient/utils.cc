@@ -133,10 +133,6 @@ int Utils::registerToMySQL(const QString &username, const QString &password)
     dbconn.setUserName(json->value("DBUsername").toString());
     dbconn.setPassword(json->value("DBPassword").toString());
 
-    // TODO
-    dbconn.setUserName("root");
-    dbconn.setPassword("mysql");
-
     if (!dbconn.open()) {
         qDebug() << dbconn.lastError().text();
         dbconn.close();
@@ -179,10 +175,6 @@ int Utils::loginToMySQL(const QString &username, const QString &password)
     dbconn.setDatabaseName(json->value("DBName").toString());
     dbconn.setUserName(json->value("DBUsername").toString());
     dbconn.setPassword(json->value("DBPassword").toString());
-
-    // TODO
-    dbconn.setUserName("root");
-    dbconn.setPassword("mysql");
 
     if (!dbconn.open()) {
         qDebug() << dbconn.lastError().text();
