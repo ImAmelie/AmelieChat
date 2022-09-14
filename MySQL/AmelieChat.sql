@@ -1,0 +1,9 @@
+CREATE DATABASE IF NOT EXISTS `AmelieChat` CHARACTER SET utf8;
+
+USE `AmelieChat`;
+
+CREATE TABLE `user`(
+    `id` int PRIMARY KEY AUTO_INCREMENT,
+    `username` VARCHAR(20) UNIQUE NOT NULL,
+    `password` VARCHAR(40) NOT NULL
+);
