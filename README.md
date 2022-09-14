@@ -18,3 +18,8 @@
 MySQL：存储注册用户，验证客户端登陆
 
 Redis：保存用户 IP 和 端口，用来进行点对点通信
+
+## 下载
+
+<https://github.com/ImAmelie/AmelieChat/releases>
+
