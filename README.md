@@ -7,9 +7,11 @@
     </a>
   </p>
 </div>
+
+
 ## 客户端
 
-采用 Qt 5 开发
+采用 Qt 5 开发，视频模块 [OpenCV](https://opencv.org/)，音频模块 Qt 原生组件。
 
 ## 服务器
 
