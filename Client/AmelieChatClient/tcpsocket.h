@@ -3,7 +3,6 @@
 
 #include <QTcpServer>
 #include <QTcpSocket>
-#include <QMutex>
 #include <QAudioInput>
 #include <QAudioOutput>
 #include <QBuffer>
@@ -49,13 +48,9 @@ private:
     quint16 listenPort;
     QString username;
 
-    QMutex sendMutex;
-    QMutex dataMutex;
     Utils &utils = Utils::getInstance();
     MainWindow *mainWin = nullptr;
     ChatWindow *chatWin = nullptr;
-
-    QMutex picMutex;
     // 摄像头
     cv::VideoCapture cap;
     cv::Mat image;

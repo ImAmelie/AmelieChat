@@ -176,47 +176,44 @@ void TcpSocket::recv()
         return;
     }
 
-    if (dataMutex.tryLock()) {
-        QByteArray arr = socket->readAll();
-        if (::recvLen + arr.size() > sizeof(::recvData)) {
-            emit mainWin->signalAsk(tr("错误"), tr("缓冲区溢出") + " " + QString::number(::recvLen) + " " + QString::number(arr.size()));
-            qApp->exit(1);
-        }
-        writeData(arr);
+    QByteArray arr = socket->readAll();
+    if (::recvLen + arr.size() > sizeof(::recvData)) {
+        emit mainWin->signalAsk(tr("错误"), tr("缓冲区溢出") + " " + QString::number(::recvLen) + " " + QString::number(arr.size()));
+        qApp->exit(1);
+    }
+    writeData(arr);
 
-        while (true) {
-            if (::len == 0 && ::recvLen > sizeof(::len)) {
-                readData(&::len, sizeof(::len));
-                utils.toHostEndian((char *)&::len, sizeof(::len));
-            }
-            if (::len != 0 && ::opt == 0 && ::recvLen > sizeof(::opt)) {
-                readData(&::opt, sizeof(::opt));
-            }
-            if (::len != 0 && ::opt != 0 && ::recvLen >= ::len) {
-                readData(&::okData, ::len);
-                QByteArray arr(::okData, ::len);
-                switch (::opt) {
-                case 1:
-                    if (chatWin != nullptr) {
-                        emit this->signalUpdatePicture(arr);
-                    }
-                    break;
-                case 2:
-                    if (chatWin != nullptr) {
-                        emit this->signalPlaySound(arr);
-                    }
-                    break;
-                default:
-                    qDebug() << "opt is ERROR!";
-                    break;
-                }
-                ::len = 0;
-                ::opt = 0;
-                continue;
-            }
-            break;
+    while (true) {
+        if (::len == 0 && ::recvLen > sizeof(::len)) {
+            readData(&::len, sizeof(::len));
+            utils.toHostEndian((char *)&::len, sizeof(::len));
         }
-        dataMutex.unlock();
+        if (::len != 0 && ::opt == 0 && ::recvLen > sizeof(::opt)) {
+            readData(&::opt, sizeof(::opt));
+        }
+        if (::len != 0 && ::opt != 0 && ::recvLen >= ::len) {
+            readData(&::okData, ::len);
+            QByteArray arr(::okData, ::len);
+            switch (::opt) {
+            case 1:
+                if (chatWin != nullptr) {
+                    emit this->signalUpdatePicture(arr);
+                }
+                break;
+            case 2:
+                if (chatWin != nullptr) {
+                    emit this->signalPlaySound(arr);
+                }
+                break;
+            default:
+                qDebug() << "opt is ERROR!";
+                break;
+            }
+            ::len = 0;
+            ::opt = 0;
+            continue;
+        }
+        break;
     }
 }
 
@@ -225,24 +222,22 @@ void TcpSocket::send(unsigned char opt, const QByteArray &data)
     if (socket == nullptr) {
         return;
     }
-    if (sendMutex.tryLock()) {
-        uint64_t len = data.size();
-        utils.toNetEndian((char *)&len, sizeof(uint64_t));
-        if (socket->write((char *)&len, sizeof(uint64_t)) != sizeof(uint64_t)) {
-            emit mainWin->signalAsk(tr("数据发送出错"), tr("数据发送出错！"));
-            qApp->exit(1);
-        }
-        if (socket->write((char *)&opt, 1) != 1) {
-            emit mainWin->signalAsk(tr("数据发送出错"), tr("数据发送出错！"));
-            qApp->exit(1);
-        }
-        if (socket->write(data.constData(), data.size()) != data.size()) {
-            emit mainWin->signalAsk(tr("数据发送出错"), tr("数据发送出错！"));
-            qApp->exit(1);
-        }
-        socket->flush();
-        sendMutex.unlock();
+
+    uint64_t len = data.size();
+    utils.toNetEndian((char *)&len, sizeof(uint64_t));
+    if (socket->write((char *)&len, sizeof(uint64_t)) != sizeof(uint64_t)) {
+        emit mainWin->signalAsk(tr("数据发送出错"), tr("数据发送出错！"));
+        qApp->exit(1);
     }
+    if (socket->write((char *)&opt, 1) != 1) {
+        emit mainWin->signalAsk(tr("数据发送出错"), tr("数据发送出错！"));
+        qApp->exit(1);
+    }
+    if (socket->write(data.constData(), data.size()) != data.size()) {
+        emit mainWin->signalAsk(tr("数据发送出错"), tr("数据发送出错！"));
+        qApp->exit(1);
+    }
+    socket->flush();
 }
 
 void TcpSocket::collectStart()
@@ -305,22 +300,19 @@ void TcpSocket::collectStop()
 
 void TcpSocket::slotGetPicture()
 {
-    if (picMutex.tryLock()) {
-        cap >> image;
-        // 从Mat转换成QImage
-        cv::Mat dest;
-        cv::cvtColor(image, dest, cv::COLOR_BGR2RGB);
-        QImage img((uchar *)dest.data, dest.cols, dest.rows, (int)dest.step, QImage::Format_RGB888);
+    cap >> image;
+    // 从Mat转换成QImage
+    cv::Mat dest;
+    cv::cvtColor(image, dest, cv::COLOR_BGR2RGB);
+    QImage img((uchar *)dest.data, dest.cols, dest.rows, (int)dest.step, QImage::Format_RGB888);
 
-        QByteArray arr;
-        QBuffer buff(&arr);
-        buff.open(QIODevice::WriteOnly);
-        img.save(&buff, "JPG");
-        buff.close();
+    QByteArray arr;
+    QBuffer buff(&arr);
+    buff.open(QIODevice::WriteOnly);
+    img.save(&buff, "JPG");
+    buff.close();
 
-        emit this->signalSend(1, arr);
-        picMutex.unlock();
-    }
+    emit this->signalSend(1, arr);
 }
 
 void TcpSocket::slotReadyReadAudio()
