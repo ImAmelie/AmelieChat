@@ -23,3 +23,17 @@ Redis：保存用户 IP 和 端口，用来进行点对点通信
 
 <https://github.com/ImAmelie/AmelieChat/releases>
 
+## 展示
+
+![](doc/img/00.主界面.png)
+
+<center><b>主界面</b></center>
+
+![](doc/img/01.设置界面.png)
+
+<center><b>设置界面</b></center>
+
+![](doc/img/03.聊天界面.png)
+
+<center><b>聊天界面</b></center>
+
