@@ -1,13 +1,14 @@
 {
-    "DBIP": "192.168.0.111",
-    "DBPort": "3306",
-    "DBName": "AmelieChat",
-    "DBUsername": "chat",
-    "DBPassword": "chat",
-    "RedisIP": "192.168.0.111",
-    "RedisPort": "6379",
-    "RedisPassword": "redis",
-    "Camera": "",
-    "Microphone": "",
-    "Speaker": ""
+    "DBIP":"",
+    "DBPort":"",
+    "DBName":"",
+    "DBUsername":"",
+    "DBPassword":"",
+    "RedisIP":"",
+    "RedisPort":"",
+    "RedisPassword":"",
+    "NetworkInterface":"",
+    "Camera":"",
+    "Microphone":"",
+    "Speaker":""
 }

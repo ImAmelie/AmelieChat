@@ -29,19 +29,30 @@ TcpSocket::TcpSocket(MainWindow *mainWin, QObject *parent)
     username = mainWin->username;
 
     server = new QTcpServer(this);
-    server->listen();
 
-    const QHostAddress &localhost = QHostAddress(QHostAddress::LocalHost);
-    for (const QHostAddress &address: QNetworkInterface::allAddresses()) {
-        if (address.protocol() == QAbstractSocket::IPv4Protocol && address != localhost) {
-            listenAddr = address.toString();
+    QJsonObject &json = utils.getJson();
+    QString networkInterfaceName = json["NetworkInterface"].toString();
+
+    for (const QNetworkInterface &interface : QNetworkInterface::allInterfaces()) {
+        if (interface.flags().testFlag(QNetworkInterface::IsUp)) {
+            if (interface.humanReadableName() == networkInterfaceName) {
+                for (const QNetworkAddressEntry &entry : interface.addressEntries()) {
+                    if (entry.ip().toString().contains('.')) {
+                        server->listen(entry.ip());
+                        listenAddr = entry.ip().toString();
+                        break;
+                    }
+                }
+                break;
+            }
+
         }
     }
 
     listenPort = server->serverPort();
 
     // 向Resids服务器发送IP:Port
-    QJsonObject &json = utils.getJson();
+    //QJsonObject &json = utils.getJson();
     redisContext *context = redisConnect(json["RedisIP"].toString().toStdString().c_str(), json["RedisPort"].toString().toInt());
     if (context != nullptr) {
         freeReplyObject(redisCommand(context, "AUTH %s", json["RedisPassword"].toString().toStdString().c_str()));
@@ -108,6 +119,7 @@ void TcpSocket::slotConnectHost(const QString addr, quint16 port)
     socket->connectToHost(addr, port);
 
     if (socket->waitForConnected()) {
+        socket->waitForReadyRead(300000);
         emit mainWin->signalCreateChatWindow();
         chatWin = mainWin->chatWin;
         connect(socket, &QTcpSocket::disconnected, [&]{
@@ -241,7 +253,7 @@ void TcpSocket::collectStart()
 
     timer = new QTimer(this);
     connect(timer, &QTimer::timeout, this, &TcpSocket::slotGetPicture);
-    timer->start(200);
+    timer->start(100);
 
     QAudioFormat format;
     format.setChannelCount(2);

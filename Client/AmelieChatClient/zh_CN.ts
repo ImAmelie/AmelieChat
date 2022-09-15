@@ -263,87 +263,92 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="settingswindow.ui" line="35"/>
+        <location filename="settingswindow.ui" line="38"/>
         <source>数据库用户名：</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="settingswindow.ui" line="45"/>
+        <location filename="settingswindow.ui" line="103"/>
         <source>摄像头：</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="settingswindow.ui" line="55"/>
+        <location filename="settingswindow.ui" line="136"/>
         <source>麦克风：</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="settingswindow.ui" line="71"/>
+        <location filename="settingswindow.ui" line="189"/>
+        <source>网卡：</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="settingswindow.ui" line="93"/>
         <source>Redis IP：</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="settingswindow.ui" line="81"/>
+        <location filename="settingswindow.ui" line="146"/>
         <source>Redis 端口：</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="settingswindow.ui" line="94"/>
+        <location filename="settingswindow.ui" line="61"/>
         <source>数据库端口：</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="settingswindow.ui" line="104"/>
+        <location filename="settingswindow.ui" line="83"/>
         <source>扬声器：</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="settingswindow.ui" line="117"/>
+        <location filename="settingswindow.ui" line="176"/>
         <source>数据库密码：</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="settingswindow.ui" line="142"/>
+        <location filename="settingswindow.ui" line="113"/>
         <source>数据库名：</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="settingswindow.ui" line="155"/>
+        <location filename="settingswindow.ui" line="159"/>
         <source>数据库 IP：</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="settingswindow.ui" line="165"/>
+        <location filename="settingswindow.ui" line="48"/>
         <source>Redis 密码：</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="settingswindow.ui" line="175"/>
+        <location filename="settingswindow.ui" line="123"/>
         <source>取消</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="settingswindow.ui" line="182"/>
+        <location filename="settingswindow.ui" line="169"/>
         <source>保存</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="settingswindow.cc" line="73"/>
+        <location filename="settingswindow.cc" line="81"/>
         <source>输入不正确</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="settingswindow.cc" line="73"/>
+        <location filename="settingswindow.cc" line="81"/>
         <source>输入内容不能为空！</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="settingswindow.cc" line="92"/>
+        <location filename="settingswindow.cc" line="100"/>
         <source>保存成功</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="settingswindow.cc" line="92"/>
+        <location filename="settingswindow.cc" line="100"/>
         <source>保存成功！</source>
         <translation type="unfinished"></translation>
     </message>
@@ -351,41 +356,41 @@
 <context>
     <name>TcpSocket</name>
     <message>
-        <location filename="tcpsocket.cc" line="82"/>
+        <location filename="tcpsocket.cc" line="93"/>
         <source>有新的连接请求</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="tcpsocket.cc" line="82"/>
+        <location filename="tcpsocket.cc" line="93"/>
         <source>来自 </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="tcpsocket.cc" line="82"/>
+        <location filename="tcpsocket.cc" line="93"/>
         <source> 的连接请求，是否接受？</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="tcpsocket.cc" line="170"/>
+        <location filename="tcpsocket.cc" line="182"/>
         <source>错误</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="tcpsocket.cc" line="170"/>
+        <location filename="tcpsocket.cc" line="182"/>
         <source>缓冲区溢出</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="tcpsocket.cc" line="220"/>
-        <location filename="tcpsocket.cc" line="224"/>
-        <location filename="tcpsocket.cc" line="228"/>
+        <location filename="tcpsocket.cc" line="232"/>
+        <location filename="tcpsocket.cc" line="236"/>
+        <location filename="tcpsocket.cc" line="240"/>
         <source>数据发送出错</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="tcpsocket.cc" line="220"/>
-        <location filename="tcpsocket.cc" line="224"/>
-        <location filename="tcpsocket.cc" line="228"/>
+        <location filename="tcpsocket.cc" line="232"/>
+        <location filename="tcpsocket.cc" line="236"/>
+        <location filename="tcpsocket.cc" line="240"/>
         <source>数据发送出错！</source>
         <translation type="unfinished"></translation>
     </message>

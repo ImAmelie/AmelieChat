@@ -4,6 +4,7 @@
 #include <QAudio>
 #include <QAudioDeviceInfo>
 #include <QMessageBox>
+#include <QNetworkInterface>
 
 #include <opencv2/videoio.hpp>
 
@@ -48,6 +49,13 @@ SettingsWindow::SettingsWindow(QWidget *parent) :
         ui->Speaker->addItem(info.deviceName());
     }
     ui->Speaker->setCurrentText(json["Speaker"].toString());
+
+    for (const QNetworkInterface &interface : QNetworkInterface::allInterfaces()) {
+        if (interface.flags().testFlag(QNetworkInterface::IsUp)) {
+            ui->networkInterfaceComboBox->addItem(interface.humanReadableName());
+        }
+    }
+    ui->networkInterfaceComboBox->setCurrentText(json["NetworkInterface"].toString());
 }
 
 SettingsWindow::~SettingsWindow()
@@ -82,7 +90,7 @@ void SettingsWindow::on_savePushButton_clicked()
     json["RedisIP"] = ui->RedisIP->text().trimmed();
     json["RedisPort"] = ui->RedisPort->text().trimmed();
     json["RedisPassword"] = ui->RedisPassword->text().trimmed();
-
+    json["NetworkInterface"] = ui->networkInterfaceComboBox->currentText();
     json["Camera"] = ui->Camera->currentText();
     json["Microphone"] = ui->Microphone->currentText();
     json["Speaker"] = ui->Speaker->currentText();
