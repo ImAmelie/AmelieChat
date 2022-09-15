@@ -21,7 +21,7 @@ Redis：保存用户 IP 和 端口，用来进行点对点通信
 
 ## 下载
 
-<https://github.com/ImAmelie/AmelieChat/releases>
+<https://github.com/ImAmelie/AmelieChat/releases/latest>
 
 ## 展示
 
