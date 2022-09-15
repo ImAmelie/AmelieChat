@@ -37,7 +37,7 @@
     <item row="0" column="0">
      <widget class="QPushButton" name="loginPushButton">
       <property name="text">
-       <string>登陆</string>
+       <string>登录</string>
       </property>
      </widget>
     </item>

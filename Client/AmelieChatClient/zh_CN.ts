@@ -141,7 +141,8 @@
     </message>
     <message>
         <location filename="mainwindow.ui" line="40"/>
-        <source>登陆</source>
+        <source>登录</source>
+        <oldsource>登陆</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>

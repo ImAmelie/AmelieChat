@@ -11,7 +11,7 @@
 
 ## 客户端
 
-采用 Qt 5 开发，视频模块 [OpenCV](https://opencv.org/)，音频模块 Qt 原生组件。
+采用 Qt 5 开发，视频模块 [OpenCV](https://opencv.org/)，音频模块 Qt 原生组件，多线程，Socket
 
 ## 服务器
 
