@@ -93,7 +93,9 @@ void MainWindow::on_logoutPushButton_clicked()
     QJsonObject &json = utils.getJson();
     redisContext *context = redisConnect(json["RedisIP"].toString().toStdString().c_str(), json["RedisPort"].toString().toInt());
     if (context != nullptr) {
-        freeReplyObject(redisCommand(context, "AUTH %s", json["RedisPassword"].toString().toStdString().c_str()));
+        if (json["RedisPassword"].toString() != "") {
+            freeReplyObject(redisCommand(context, "AUTH %s", json["RedisPassword"].toString().toStdString().c_str()));
+        }
         freeReplyObject(redisCommand(context, "del AmelieChat_%s", username.toStdString().c_str()));
         redisFree(context);
     }
